@@ -4,20 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </head>
   <body>
     <nav class="py-6 px-8 flex items-center justify-between bg-slate-800">
       <a href="{% url 'account:index' %}"
         ><h1 class="text-xl text-white">EMS</h1></a
       >
-      <div class="space-x-4">
+      <div class="space-x-4 hidden md:flex">
         <a href="{% url 'account:about' %}" class="text-white">About</a>
-
-
         <a href="{% url 'account:login' %}" class="py-4 px-8 bg-slate-600 text-white">Log in</a>
         <a href="{% url 'account:signin' %}" class="py-4 px-8 bg-sky-600 text-white">Sign in</a>
-
       </div>
+        <button class="md:hidden text-white" id="menu-button">
+            <ion-icon name="menu" id="menu-icon" class="text-white"></ion-icon>
+        </button>
+
+        <div class="absolute top-16 left-0 right-0 bg-slate-800 hidden flex-row space-y-4 py-4 px-8 md:hidden" id="mobile-menu">
+            <a href="{% url 'account:about' %}" class="text-white">About</a>
+        <a href="{% url 'account:login' %}" class="py-4 px-8 bg-slate-600 text-white">Log in</a>
+        <a href="{% url 'account:signin' %}" class="py-4 px-8 bg-sky-600 text-white">Sign in</a>
+        </div>
     </nav>
 
     <main class="py-6 px-8">
@@ -27,5 +35,21 @@
     <footer class="py-8 px-8 bg-slate-900 text-center">
       <p class="text-white">Copyright (c) 2024 - CodeBunny</p>
     </footer>
+
+  <script>
+      const menuButton = document.getElementById('menu-button');
+      const mobileMenu = document.getElementById(('mobile-menu'))
+      const menuIcon = document.getElementById('menu-icon')
+
+      menuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden')
+
+          if (menuIcon.name === 'menu') {
+              menuIcon.name = 'close'
+          } else {
+              menuIcon.name = 'menu'
+          }
+      })
+  </script>
   </body>
 </html>
